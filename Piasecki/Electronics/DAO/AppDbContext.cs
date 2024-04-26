@@ -21,7 +21,7 @@ namespace Piasecki.Electronics.DAO
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseMySql("", new MySqlServerVersion("8.0.21"));
+            optionsBuilder.UseMySql("server=localhost;port=3306;database=electronics_schema;user=root;password=admin", new MySqlServerVersion("8.0.21"));
 
             return new AppDbContext(optionsBuilder.Options);
         }
