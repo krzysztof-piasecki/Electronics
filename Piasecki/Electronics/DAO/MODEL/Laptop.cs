@@ -1,25 +1,19 @@
+using System.ComponentModel.DataAnnotations;
 using Piasecki.Electronics.INTERFACES;
 
 namespace Piasecki.Electronics.DAO.MODEL;
 
-public class Laptop
+public class Laptop : IEntity
 {
-    public Laptop(string name, decimal price, string cpu, string gpu, decimal size)
-    {
-        Name = name;
-        Price = price;
-        CPU = cpu;
-        GPU = gpu;
-        Size = size;
-        Type = ProductType.GPU;
-
-    }
-
+    [Key] 
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public decimal Price { get; set; }
     public string CPU { get; set; }
     public string GPU { get; set; }
     public decimal Size { get; set; }
-    public ProductType Type { get; }
-
+    public ProductBrand Brand { get; set; } = ProductBrand.Lenovo;
+    
+    public Guid ProductId { get; set; }
+    public virtual Product Product { get; set; }
 }

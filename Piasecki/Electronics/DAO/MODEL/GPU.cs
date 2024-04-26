@@ -1,19 +1,17 @@
+using System.ComponentModel.DataAnnotations;
 using Piasecki.Electronics.INTERFACES;
 
 namespace Piasecki.Electronics.DAO.MODEL;
 
-public class GPU
+public class GPU : IEntity
 {
-    public GPU(string name, decimal price, string vRam)
-    {
-        Name = name;
-        Price = price;
-        VRam = vRam;
-        Type = ProductType.GPU;
-    }
-
+    [Key] 
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public decimal Price { get; set; }
     public string VRam { get; set; }
-    public ProductType Type { get; }
+    public ProductType Type { get; set; } = ProductType.GPU;
+    
+    public Guid ProductId { get; set; }
+    public virtual Product Product { get; set; }
 }

@@ -13,20 +13,19 @@ namespace Piasecki.Electronics.UI
         public IServiceProvider ServiceProvider { get; private set; }  = null!;
         public IConfiguration Configuration { get; private set; }  = null!;
 
-        protected override void OnStartup(StartupEventArgs e)
+        public App()
         {
-            base.OnStartup(e);
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
 
-            IConfiguration configuration = builder.Build();
-
+            Configuration = builder.Build();
+            
             var services = new ServiceCollection();
             services.AddDbContext<AppDbContext>(options =>
-                options.UseMySql(configuration.GetConnectionString("DefaultConnection"),
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
                     new MySqlServerVersion(new Version(8, 0, 21))));
-
+            
             ServiceProvider = services.BuildServiceProvider();
         }
     }

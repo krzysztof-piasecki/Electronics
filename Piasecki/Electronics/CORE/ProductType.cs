@@ -7,3 +7,10 @@ public enum ProductType
     Laptop,
     Phone
 }
+
+public enum ProductBrand
+{
+    HP,
+    Dell,
+    Lenovo
+}
