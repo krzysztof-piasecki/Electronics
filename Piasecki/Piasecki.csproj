@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Electronics\BL\" />
+      <Folder Include="Electronics\MVVM\" />
+      <Folder Include="Electronics\UI\ViewsModels\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Electronics\UI\Views\MainWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ApplicationDefinition Include="Electronics\UI\App.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </ApplicationDefinition>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0-preview.3.24172.4" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0-preview.3.24172.9" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0-preview.3.24172.9" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.3.24172.9" />
+      <PackageReference Include="MySql.Data" Version="8.3.0" />
+      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0-preview.1" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,8 @@
+﻿<Application x:Class="Piasecki.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="/Electronics/UI/Views/MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
