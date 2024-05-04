@@ -1,32 +1,56 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Prism.Ioc;
+using Prism.Unity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 using System.Windows;
+using Piasecki.Electronics.BL;
 using Piasecki.Electronics.DAO;
+using Piasecki.Electronics.DAO.REPOSITORIES;
 
 namespace Piasecki.Electronics.UI
 {
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
-        public IServiceProvider ServiceProvider { get; private set; }  = null!;
-        public IConfiguration Configuration { get; private set; }  = null!;
+        public IConfiguration Configuration { get; private set; }
 
         public App()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
-
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             Configuration = builder.Build();
-            
-            var services = new ServiceCollection();
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
-                    new MySqlServerVersion(new Version(8, 0, 21))));
-            
-            ServiceProvider = services.BuildServiceProvider();
+        }
+
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.Register<AppDbContext>(containerProvider =>
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+                optionsBuilder.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 21)));
+                return new AppDbContext(optionsBuilder.Options);
+            });
+
+            containerRegistry.Register<Repository>();
+            containerRegistry.Register<ProductService>();
+            containerRegistry.Register<PhoneService>();
+            containerRegistry.Register<LaptopService>();
+            containerRegistry.Register<GPUService>();
+            containerRegistry.Register<DisplayMonitorService>();
+            containerRegistry.RegisterSingleton<MainWindow>();
+        }
+
+        protected override Window CreateShell()
+        {
+            return Container.Resolve<MainWindow>();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            MainWindow = Container.Resolve<MainWindow>();
+            MainWindow.Show();
         }
     }
 }

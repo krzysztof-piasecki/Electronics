@@ -10,7 +10,6 @@ public class GPU : IEntity
     public string Name { get; set; }
     public decimal Price { get; set; }
     public string VRam { get; set; }
-    public ProductType Type { get; set; } = ProductType.GPU;
     
     public Guid ProductId { get; set; }
     public virtual Product Product { get; set; }

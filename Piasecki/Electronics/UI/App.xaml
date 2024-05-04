@@ -1,8 +1,7 @@
-﻿<Application x:Class="Piasecki.App"
+﻿<prism:PrismApplication x:Class="Piasecki.Electronics.UI.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="/Electronics/UI/Views/MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
-</Application>
+             xmlns:prism="http://prismlibrary.com/">
+    <prism:PrismApplication.Resources>
+    </prism:PrismApplication.Resources>
+</prism:PrismApplication>

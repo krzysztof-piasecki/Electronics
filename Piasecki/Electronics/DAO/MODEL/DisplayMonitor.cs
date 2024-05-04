@@ -10,7 +10,6 @@ public class DisplayMonitor : IEntity
     public string Name { get; set; }
     public decimal Price { get; set; }
     public decimal Diagonal { get; set; }
-    public ProductType Type { get; set; } = ProductType.DisplayMonitor;
     
     public Guid ProductId { get; set; }
     public virtual Product Product { get; set; }

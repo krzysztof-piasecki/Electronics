@@ -1,0 +1,43 @@
+<Window x:Class="Piasecki.Electronics.UI.Views.CreateLaptop"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Piasecki.Electronics.UI.Views"
+        mc:Ignorable="d"
+        Title="CreatePhone" Height="450" Width="800">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Name="Title" Grid.Row="0" Content="Laptop" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontSize="24"
+               FontWeight="Bold" />
+        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1" Content="Nazwa:"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Width="150" HorizontalAlignment="Left" Name="TextBoxName" Grid.ColumnSpan="3"></TextBox>
+        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="2" Content="Cena:"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Width="150" HorizontalAlignment="Left" Name="TextBoxPrice" Grid.ColumnSpan="3"></TextBox>
+        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="3" Content="CPU:"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Width="150" HorizontalAlignment="Left" Name="TextBoxCPU" Grid.ColumnSpan="3"></TextBox>
+        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="4" Content="GPU:"/>
+        <TextBox Grid.Column="1" Grid.Row="4" Width="150" HorizontalAlignment="Left" Name="TextBoxGPU" Grid.ColumnSpan="3"></TextBox>
+        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="5" Content="Przekątna:"/>
+        <TextBox Grid.Column="1" Grid.Row="5" Width="150" HorizontalAlignment="Left" Name="TextBoxSize" Grid.ColumnSpan="3"></TextBox>
+        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="6" Content="Marka:"/>
+        <ComboBox Grid.Column="1" x:Name="BrandComboBox" DisplayMemberPath="Value" SelectedValuePath="Key" HorizontalAlignment="Center" Grid.Row="6" Width="150" Grid.ColumnSpan="3"></ComboBox>
+        <Button Grid.Column="1"  Grid.Row="7" Content="Zapisz" Click="BtnSaveClick" />
+        <Button Grid.Column="2"  Grid.Row="7" Content="Powrót" Click="BtnBackClick" />
+    </Grid>
+</Window>

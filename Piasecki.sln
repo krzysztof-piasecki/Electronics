@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piasecki", "Piasecki\Piasecki.csproj", "{A783876F-4CFC-4FC6-97E1-B4C8BA21C3E5}"
 EndProject
 Global
@@ -12,5 +15,11 @@ Global
 		{A783876F-4CFC-4FC6-97E1-B4C8BA21C3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A783876F-4CFC-4FC6-97E1-B4C8BA21C3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A783876F-4CFC-4FC6-97E1-B4C8BA21C3E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9CA9626-E088-4F41-9306-5174B247440B}
 	EndGlobalSection
 EndGlobal

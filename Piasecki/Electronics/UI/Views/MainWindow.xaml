@@ -1,9 +1,38 @@
-﻿<Window x:Class="Piasecki.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Przykładowa aplikacja WPF" Height="200" Width="300">
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Label x:Name="Label" Content="Kliknij przycisk" HorizontalAlignment="Center" Margin="10"/>
-        <Button Content="Kliknij mnie" HorizontalAlignment="Center" Click="Button_Click"/>
-    </StackPanel>
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="av"
+    Title="MainWindoiw" Height="400" Width="400"
+    x:Class="Piasecki.MainWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="300" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0"
+               Content="Lista Wszystkich Produktów"
+               Grid.ColumnSpan="6"
+               HorizontalAlignment="Center"
+               FontSize="24"
+               FontWeight="Bold" />
+        <ListView Name="LvEntries" Grid.Row="1" Grid.ColumnSpan="6" />
+        <Button Grid.Row="2" Grid.Column="0" Name="BtnAddPhone" Content="Dodaj Telefon" Click="BtnAddPhoneClick" />
+        <Button Grid.Row="2" Grid.Column="1" Name="BtnAddLaptop" Content="Dodaj Laptop"
+                Click="BtnAddLaptopClick" />
+        <Button Grid.Row="2" Grid.Column="2" Name="BtnAddGPU" Content="Dodaj GPU" Click="BtnAddGPUClick" />
+        <Button Grid.Row="2" Grid.Column="3" Name="BtnAddDisplayMonitor" Content="Dodaj Monitor"
+                Click="BtnAddDisplayMonitorClick" />
+        <Button Grid.Row="3" Grid.Column="1" Name="BtnEdit" Content="Edytuj" Click="BtnDeleteClick" />
+        <Button Grid.Row="4" Grid.Column="2" Name="DeleteAdd" Content="Usuń" Click="BtnEditClick" />
+    </Grid>
 </Window>
