@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Piasecki.Electronics.DAO.MODEL;
 using Piasecki.Electronics.INTERFACES;
@@ -22,13 +23,20 @@ namespace Piasecki.Electronics.DAO.REPOSITORIES
         
         public async Task<List<T>> GetAll<T>() where T : class
         {
-            
+            return Enumerable.Empty<T>().ToList();
             return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public async Task<T?> GetById<T>(Guid id) where T : class, IEntity
+        public async Task<T?> GetById<T>(Guid id, params Expression<Func<T, object>>[] includeProperties) where T : class, IEntity
         {
-            return await _dbContext.Set<T>().FirstOrDefaultAsync(p => p.Id == id);
+            var query = _dbContext.Set<T>().AsQueryable();
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return await query.FirstOrDefaultAsync(p => p.Id == id);
         }
         
         public async Task Delete<T>(Guid id) where T : class, IEntity

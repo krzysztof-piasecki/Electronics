@@ -1,58 +1,48 @@
 using System.Windows;
-using System.Windows.Input;
 using Piasecki.Electronics.BL;
-using Piasecki.Electronics.DAO.MODEL;
+using Piasecki.Electronics.UI.ViewsModels;
 
 namespace Piasecki.Electronics.UI.Views;
 
 public partial class CreatePhone : Window
 {
-    private Phone _phone;
+    public PhoneViewModel PhoneViewModel { get; set; }
     private PhoneService _phoneService;
 
     public CreatePhone(PhoneService phoneService)
     {
         InitializeComponent();
         _phoneService = phoneService;
-        _phone = new Phone();
+        
+        PhoneViewModel = new PhoneViewModel()
+        {
+            Camera = "blabla",
+            Price = 1.05m,
+            Name = "Nikon"
+        };
+        
+        DataContext = PhoneViewModel;
     }
 
-    public CreatePhone(Phone phone, PhoneService phoneService)
+    public CreatePhone(PhoneViewModel phoneViewModel, PhoneService phoneService)
     {
         InitializeComponent();
         _phoneService = phoneService;
-        _phone = phone;
-        LoadPhoneData();
-    }
-
-    private void LoadPhoneData()
-    {
-        TextBoxName.Text = _phone.Name;
-        TextBoxPrice.Text = _phone.Price.ToString();
-        TextBoxCamera.Text = _phone.Camera;
+        PhoneViewModel = phoneViewModel;
+        
+        DataContext = PhoneViewModel;
     }
 
     private async void BtnSaveClick(object sender, RoutedEventArgs e)
     {
-        _phone.Name = TextBoxName.Text;
-        _phone.Camera = TextBoxCamera.Text;
-
-        if (!decimal.TryParse(TextBoxPrice.Text, out decimal price))
+        if (PhoneViewModel.Id is null)
         {
-            MessageBox.Show("Podaj poprawną cenę w formacie liczbowym.");
-            return;
-        }
-
-        _phone.Price = price;
-
-        if (_phone.Id == Guid.Empty)
-        {
-            await _phoneService.AddPhoneAsync(_phone);
+            await _phoneService.AddPhoneAsync(PhoneViewModel);
             MessageBox.Show("Nowy telefon zapisany!");
         }
         else
         {
-            await _phoneService.UpdatePhoneAsync(_phone);
+            await _phoneService.UpdatePhoneAsync(PhoneViewModel);
             MessageBox.Show("Telefon zaktualizowany!");
         }
     }
