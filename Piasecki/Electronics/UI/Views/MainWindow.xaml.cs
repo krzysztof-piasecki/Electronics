@@ -1,12 +1,14 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using Piasecki.Electronics.BL;
-using Piasecki.Electronics.DAO;
 using Piasecki.Electronics.DAO.MODEL;
-using Piasecki.Electronics.DAO.REPOSITORIES;
 using Piasecki.Electronics.UI.Views;
+using Piasecki.Electronics.UI.ViewsModels;
 
 namespace Piasecki;
+
 public partial class MainWindow : Window
 {
     private readonly ProductService _productService;
@@ -15,6 +17,8 @@ public partial class MainWindow : Window
     private readonly GPUService _gpuService;
     private readonly DisplayMonitorService _displayMonitorService;
 
+    public MainWindowContext MainWindowContext { get; set; }
+    
     public MainWindow(ProductService productService, PhoneService phoneService,
                       LaptopService laptopService, GPUService gpuService,
                       DisplayMonitorService displayMonitorService)
@@ -64,7 +68,7 @@ public partial class MainWindow : Window
 
     private void BtnEditClick(object sender, RoutedEventArgs e)
     {
-        if (LvEntries.SelectedItem is Phone phone)
+        if (LvEntries.SelectedItem is PhoneViewModel phone)
         {
             var editPhone = new CreatePhone(phone, _phoneService);
             editPhone.Show();
@@ -85,8 +89,7 @@ public partial class MainWindow : Window
             editDisplayMonitor.Show();
         }
     }
-
-
+    
     private async void BtnDeleteClick(object sender, RoutedEventArgs e)
     {
         if (LvEntries.SelectedItem is Phone phone)
@@ -109,5 +112,83 @@ public partial class MainWindow : Window
             await _laptopService.DeleteLaptopAsync(laptop);
             MessageBox.Show("Laptop został usunięty!");
         }
+    }
+}
+
+public class MainWindowContext : INotifyPropertyChanged
+{
+    public ProductViewModel SelectedItem { get; set; }
+    public List<ProductViewModel> Items { get; set; }
+    
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
+    }
+}
+
+public class ProductViewModel : INotifyPropertyChanged
+{
+    private Guid id;
+    public Guid Id
+    {
+        get
+        {
+            return id;
+        }
+        set
+        {
+            SetField(ref id, value);
+        }
+    }
+
+    private string name;
+    public string Name
+    {
+        get
+        {
+            return name;
+        }
+        set
+        {
+            SetField(ref name, value);
+        }
+    }
+
+    private ProductType type;
+    public ProductType Type
+    {
+        get
+        {
+            return type;
+        }
+        set
+        {
+            SetField(ref type, value);
+        }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
     }
 }

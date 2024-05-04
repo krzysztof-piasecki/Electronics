@@ -4,6 +4,7 @@
     xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="av"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}"
     Title="MainWindoiw" Height="400" Width="400"
     x:Class="Piasecki.MainWindow">
     <Grid>
@@ -25,7 +26,9 @@
                HorizontalAlignment="Center"
                FontSize="24"
                FontWeight="Bold" />
-        <ListView Name="LvEntries" Grid.Row="1" Grid.ColumnSpan="6" />
+        <ListView Name="LvEntries" Grid.Row="1" Grid.ColumnSpan="6"
+                  ItemsSource="{Binding MainWindowContext.Items}" 
+                  SelectedItem="{Binding MainWindowContext.SelectedItem}"/>
         <Button Grid.Row="2" Grid.Column="0" Name="BtnAddPhone" Content="Dodaj Telefon" Click="BtnAddPhoneClick" />
         <Button Grid.Row="2" Grid.Column="1" Name="BtnAddLaptop" Content="Dodaj Laptop"
                 Click="BtnAddLaptopClick" />
