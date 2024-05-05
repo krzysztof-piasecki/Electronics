@@ -95,7 +95,7 @@ namespace Piasecki
                 switch (selectedProduct.Type.ToString())
                 {
                     case "Phone":
-                        var phone = await _phoneService.GetPhoneByGuid(selectedProduct.Id);
+                        var phone = await _phoneService.GetPhoneByProductId(selectedProduct.Id);
                         var editPhone = new CreatePhone(phone,selectedProduct.Name, _phoneService);
                         editPhone.Show();
                         break;

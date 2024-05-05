@@ -37,6 +37,19 @@ namespace Piasecki.Electronics.DAO.REPOSITORIES
 
             return await query.FirstOrDefaultAsync(p => p.Id == id);
         }
+        
+        public async Task<T?> Get<T>(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+            where T : class, IEntity
+        {
+            var query = _dbContext.Set<T>().AsQueryable();
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return await query.FirstOrDefaultAsync(predicate);
+        }
 
         public async Task Delete<T>(Guid id) where T : class, IEntity
         {

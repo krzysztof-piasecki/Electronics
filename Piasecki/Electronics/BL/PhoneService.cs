@@ -53,9 +53,9 @@ public class PhoneService
         await _repository.Update(phone);
     }
 
-    public async Task<Phone?> GetPhoneByGuid(Guid guid)
+    public async Task<Phone?> GetPhoneByProductId(Guid productId)
     {
-        return await _repository.GetById<Phone>(guid);
+        return await _repository.Get<Phone>(x => x.Product.Id == productId);
     }
 
     public async Task DeletePhoneAsync(Phone phone)
