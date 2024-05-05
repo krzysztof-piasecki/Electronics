@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:Piasecki.Electronics.UI.Views"
         mc:Ignorable="d"
         Title="CreatePhone" Height="450" Width="800">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -15,17 +14,23 @@
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="70" />
+            <ColumnDefinition />
+            <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Label Name="Title" Grid.Row="0" Content="Monitor" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontSize="24"
+        <Label Grid.Row="0" Content="GPU" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontSize="24"
                FontWeight="Bold" />
-        <Label Grid.Column="0" Name="NameLabel" HorizontalAlignment="Center" Grid.Row="1" Content="Nazwa:"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Width="150" HorizontalAlignment="Left" Name="TextBoxName"></TextBox>
-        <Label Grid.Column="0" Name="PriceLabel" HorizontalAlignment="Center" Grid.Row="2" Content="Cena:"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Width="150" HorizontalAlignment="Left" Name="TextBoxPrice"></TextBox>
-        <Label Grid.Column="0" Name="DiagonalLabel" HorizontalAlignment="Center" Grid.Row="3" Content="Przekątna:"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Width="150" HorizontalAlignment="Left" Name="TextBoxDiagonal"></TextBox>
-        <Button Grid.ColumnSpan="6" Grid.Row="5"  Name="SavePhone" Content="Zapisz" Click="BtnSaveClick" />
+        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1" Content="GPU:" />
+        <TextBox Grid.Column="1" Grid.Row="1" Width="150" HorizontalAlignment="Left" Grid.ColumnSpan="3"
+                 Text="{Binding Name}" />
+        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="2" Content="Cena:" />
+        <TextBox Grid.Column="1" Grid.Row="2" Width="150" HorizontalAlignment="Left" Grid.ColumnSpan="3"
+                 Text="{Binding Price}" />
+        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="3" Content="Przekątna:" />
+        <TextBox Grid.Column="1" Grid.Row="3" Width="150" HorizontalAlignment="Left" Grid.ColumnSpan="3"
+                 Text="{Binding Diagonal}" />
+        <Button Grid.Column="1" Grid.Row="4" Content="Zapisz" Click="BtnSaveClick" />
+        <Button Grid.Column="2" Grid.Row="4" Content="Powrót" Click="BtnBackClick" />
     </Grid>
 </Window>

@@ -46,12 +46,12 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Electronics\UI\Views\CreateLaptop.xaml">
+      <Page Update="Electronics\UI\Views\CreateDisplayMonitor.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Electronics\UI\Views\CreateDisplayMonitor.xaml">
+      <Page Update="Electronics\UI\Views\CreateLaptop.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>

@@ -1,11 +1,18 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Piasecki.Electronics.DAO.MODEL;
 
 namespace Piasecki.Electronics.UI.ViewsModels;
 
-public class PhoneViewModel : INotifyPropertyChanged
+public class ProductViewModel : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
+    private Guid id;
+
+    public Guid Id
+    {
+        get { return id; }
+        set { SetField(ref id, value); }
+    }
 
     private string name;
 
@@ -15,29 +22,15 @@ public class PhoneViewModel : INotifyPropertyChanged
         set { SetField(ref name, value); }
     }
 
-    private decimal price;
+    private ProductType type;
 
-    public decimal Price
+    public ProductType Type
     {
-        get { return price; }
-        set { SetField(ref price, value); }
+        get { return type; }
+        set { SetField(ref type, value); }
     }
 
-    private string camera;
-
-    public string Camera
-    {
-        get { return camera; }
-        set { SetField(ref camera, value); }
-    }
-
-    private Guid? id;
-
-    public Guid? Id
-    {
-        get { return id; }
-        set { SetField(ref id, value); }
-    }
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {

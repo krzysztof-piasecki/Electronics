@@ -1,64 +1,48 @@
 using System.Windows;
-using System.Windows.Input;
 using Piasecki.Electronics.BL;
-using Piasecki.Electronics.DAO.MODEL;
+using Piasecki.Electronics.UI.ViewsModels;
 
 namespace Piasecki.Electronics.UI.Views;
 
 public partial class CreateDisplayMonitor : Window
 {
-    private DisplayMonitor _displayMonitor;
+    public DisplayMonitorViewModel DisplayMonitorViewModel { get; set; }
     private DisplayMonitorService _displayMonitorService;
 
     public CreateDisplayMonitor(DisplayMonitorService displayMonitorService)
     {
         InitializeComponent();
         _displayMonitorService = displayMonitorService;
-        _displayMonitor = new DisplayMonitor(); 
+
+        DisplayMonitorViewModel = new DisplayMonitorViewModel();
+
+        DataContext = DisplayMonitorViewModel;
     }
 
-    public CreateDisplayMonitor(DisplayMonitor displayMonitor, DisplayMonitorService displayMonitorService)
+    public CreateDisplayMonitor(DisplayMonitorViewModel displayMonitorViewModel,
+        DisplayMonitorService displayMonitorService)
     {
         InitializeComponent();
         _displayMonitorService = displayMonitorService;
-        _displayMonitor = displayMonitor;
-        LoadDisplayMonitorData();
-    }
+        DisplayMonitorViewModel = displayMonitorViewModel;
 
-    private void LoadDisplayMonitorData()
-    {
-        TextBoxName.Text = _displayMonitor.Name;
-        TextBoxPrice.Text = _displayMonitor.Price.ToString();
-        TextBoxDiagonal.Text = _displayMonitor.Diagonal.ToString();
+        DataContext = DisplayMonitorViewModel;
     }
 
     private async void BtnSaveClick(object sender, RoutedEventArgs e)
     {
-        _displayMonitor.Name = TextBoxName.Text;
-
-        if (!decimal.TryParse(TextBoxPrice.Text, out decimal price))
+        if (DisplayMonitorViewModel.Id is null)
         {
-            MessageBox.Show("Podaj poprawną cenę w formacie liczbowym.");
-            return;
-        }
-        if (!decimal.TryParse(TextBoxPrice.Text, out decimal diagonal))
-        {
-            MessageBox.Show("Podaj poprawną przekątną w formacie liczbowym.");
-            return;
-        }
-        _displayMonitor.Diagonal = diagonal;
-
-        if (_displayMonitor.Id == Guid.Empty)
-        {
-            await _displayMonitorService.AddDisplayMonitorAsync(_displayMonitor);
-            MessageBox.Show("Nowy monitor zapisany!");
+            await _displayMonitorService.AddDisplayMonitorAsync(DisplayMonitorViewModel);
+            MessageBox.Show("Nowy Monitor zapisany!");
         }
         else
         {
-            await _displayMonitorService.UpdateDisplayMonitorAsync(_displayMonitor); 
+            await _displayMonitorService.UpdateDisplayMonitorAsync(DisplayMonitorViewModel);
             MessageBox.Show("Monitor zaktualizowany!");
         }
     }
+
     private void BtnBackClick(object sender, RoutedEventArgs e)
     {
         this.Close();

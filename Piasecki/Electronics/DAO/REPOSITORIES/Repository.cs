@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Piasecki.Electronics.DAO.MODEL;
 using Piasecki.Electronics.INTERFACES;
 
 namespace Piasecki.Electronics.DAO.REPOSITORIES
@@ -16,18 +15,18 @@ namespace Piasecki.Electronics.DAO.REPOSITORIES
 
         public async Task Add<T>(T entity) where T : class
         {
-            await _dbContext.Set<T>().AddAsync(entity); 
-            
+            await _dbContext.Set<T>().AddAsync(entity);
+
             await _dbContext.SaveChangesAsync();
         }
-        
+
         public async Task<List<T>> GetAll<T>() where T : class
         {
-            return Enumerable.Empty<T>().ToList();
             return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public async Task<T?> GetById<T>(Guid id, params Expression<Func<T, object>>[] includeProperties) where T : class, IEntity
+        public async Task<T?> GetById<T>(Guid id, params Expression<Func<T, object>>[] includeProperties)
+            where T : class, IEntity
         {
             var query = _dbContext.Set<T>().AsQueryable();
 
@@ -38,7 +37,7 @@ namespace Piasecki.Electronics.DAO.REPOSITORIES
 
             return await query.FirstOrDefaultAsync(p => p.Id == id);
         }
-        
+
         public async Task Delete<T>(Guid id) where T : class, IEntity
         {
             var entityToDelete = await _dbContext.Set<T>().FirstOrDefaultAsync(e => e.Id == id);
@@ -46,6 +45,7 @@ namespace Piasecki.Electronics.DAO.REPOSITORIES
             {
                 throw new InvalidOperationException("Entity not found");
             }
+
             _dbContext.Entry(entityToDelete).State = EntityState.Deleted;
             await _dbContext.SaveChangesAsync();
         }

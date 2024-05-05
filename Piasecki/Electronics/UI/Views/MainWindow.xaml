@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="av"
     DataContext="{Binding RelativeSource={RelativeSource Self}}"
-    Title="MainWindoiw" Height="400" Width="400"
+    Title="MainWindoiw" Height="450" Width="400"
     x:Class="Piasecki.MainWindow">
     <Grid>
         <Grid.RowDefinitions>
@@ -27,8 +27,8 @@
                FontSize="24"
                FontWeight="Bold" />
         <ListView Name="LvEntries" Grid.Row="1" Grid.ColumnSpan="6"
-                  ItemsSource="{Binding MainWindowContext.Items}" 
-                  SelectedItem="{Binding MainWindowContext.SelectedItem}"/>
+                  ItemsSource="{Binding MainWindowContext.Items}"
+                  SelectedItem="{Binding MainWindowContext.SelectedItem}" />
         <Button Grid.Row="2" Grid.Column="0" Name="BtnAddPhone" Content="Dodaj Telefon" Click="BtnAddPhoneClick" />
         <Button Grid.Row="2" Grid.Column="1" Name="BtnAddLaptop" Content="Dodaj Laptop"
                 Click="BtnAddLaptopClick" />

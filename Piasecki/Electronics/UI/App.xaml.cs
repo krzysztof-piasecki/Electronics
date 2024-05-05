@@ -1,13 +1,12 @@
-﻿using Prism.Ioc;
-using Prism.Unity;
+﻿using System.IO;
+using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.IO;
-using System.Windows;
 using Piasecki.Electronics.BL;
 using Piasecki.Electronics.DAO;
 using Piasecki.Electronics.DAO.REPOSITORIES;
+using Prism.Ioc;
+using Prism.Unity;
 
 namespace Piasecki.Electronics.UI
 {
@@ -28,7 +27,8 @@ namespace Piasecki.Electronics.UI
             containerRegistry.Register<AppDbContext>(containerProvider =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-                optionsBuilder.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 21)));
+                optionsBuilder.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
+                    new MySqlServerVersion(new Version(8, 0, 21)));
                 return new AppDbContext(optionsBuilder.Options);
             });
 

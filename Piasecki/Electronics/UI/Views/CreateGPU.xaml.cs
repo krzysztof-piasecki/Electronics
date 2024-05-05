@@ -1,60 +1,47 @@
 using System.Windows;
-using System.Windows.Input;
 using Piasecki.Electronics.BL;
-using Piasecki.Electronics.DAO.MODEL;
+using Piasecki.Electronics.UI.ViewsModels;
 
 namespace Piasecki.Electronics.UI.Views;
 
 public partial class CreateGPU : Window
 {
-    private GPU _gpu;
+    public GPUViewModel GPUViewModel { get; set; }
     private GPUService _gpuService;
 
     public CreateGPU(GPUService gpuService)
     {
         InitializeComponent();
         _gpuService = gpuService;
-        _gpu = new GPU(); 
+
+        GPUViewModel = new GPUViewModel();
+
+        DataContext = GPUViewModel;
     }
 
-    public CreateGPU(GPU gpu, GPUService gpuService)
+    public CreateGPU(GPUViewModel gpuViewModel, GPUService gpuService)
     {
         InitializeComponent();
         _gpuService = gpuService;
-        _gpu = gpu;
-        LoadGPUData();
-    }
+        GPUViewModel = gpuViewModel;
 
-    private void LoadGPUData()
-    {
-        TextBoxName.Text = _gpu.Name;
-        TextBoxPrice.Text = _gpu.Price.ToString();
-        TextBoxVram.Text = _gpu.VRam;
+        DataContext = GPUViewModel;
     }
 
     private async void BtnSaveClick(object sender, RoutedEventArgs e)
     {
-        _gpu.Name = TextBoxName.Text;
-        _gpu.VRam = TextBoxVram.Text;
-
-        if (!decimal.TryParse(TextBoxPrice.Text, out decimal price))
+        if (GPUViewModel.Id is null)
         {
-            MessageBox.Show("Podaj poprawną cenę w formacie liczbowym.");
-            return;
-        }
-        _gpu.Price = price;
-
-        if (_gpu.Id == Guid.Empty)
-        {
-            await _gpuService.AddGPUAsync(_gpu);
+            await _gpuService.AddGPUAsync(GPUViewModel);
             MessageBox.Show("Nowy GPU zapisany!");
         }
         else
         {
-            await _gpuService.UpdateGPUAsync(_gpu); 
+            await _gpuService.UpdateGPUAsync(GPUViewModel);
             MessageBox.Show("GPU zaktualizowany!");
         }
     }
+
     private void BtnBackClick(object sender, RoutedEventArgs e)
     {
         this.Close();

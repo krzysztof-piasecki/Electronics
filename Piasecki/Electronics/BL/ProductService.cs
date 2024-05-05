@@ -12,9 +12,10 @@ public class ProductService
     {
         var dbContextFactory = new DbContextFactory();
         var appDbContext = dbContextFactory.CreateDbContext(new string[0]);
-        
+
         _repository = new Repository(appDbContext);
     }
+
     public async Task<IEnumerable<Product>> GetAllProductsAsync()
     {
         return await _repository.GetAll<Product>();

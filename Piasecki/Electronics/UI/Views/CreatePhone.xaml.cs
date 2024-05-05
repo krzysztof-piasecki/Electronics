@@ -13,14 +13,8 @@ public partial class CreatePhone : Window
     {
         InitializeComponent();
         _phoneService = phoneService;
-        
-        PhoneViewModel = new PhoneViewModel()
-        {
-            Camera = "blabla",
-            Price = 1.05m,
-            Name = "Nikon"
-        };
-        
+
+        PhoneViewModel = new PhoneViewModel();
         DataContext = PhoneViewModel;
     }
 
@@ -29,7 +23,7 @@ public partial class CreatePhone : Window
         InitializeComponent();
         _phoneService = phoneService;
         PhoneViewModel = phoneViewModel;
-        
+
         DataContext = PhoneViewModel;
     }
 

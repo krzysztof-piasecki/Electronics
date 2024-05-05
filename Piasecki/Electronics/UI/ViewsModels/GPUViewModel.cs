@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Piasecki.Electronics.UI.ViewsModels;
 
-public class PhoneViewModel : INotifyPropertyChanged
+public class GPUViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -23,12 +23,12 @@ public class PhoneViewModel : INotifyPropertyChanged
         set { SetField(ref price, value); }
     }
 
-    private string camera;
+    private string vram;
 
-    public string Camera
+    public string Vram
     {
-        get { return camera; }
-        set { SetField(ref camera, value); }
+        get { return vram; }
+        set { SetField(ref vram, value); }
     }
 
     private Guid? id;

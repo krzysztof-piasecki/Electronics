@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using Piasecki.Electronics.BL;
@@ -18,10 +17,10 @@ public partial class MainWindow : Window
     private readonly DisplayMonitorService _displayMonitorService;
 
     public MainWindowContext MainWindowContext { get; set; }
-    
+
     public MainWindow(ProductService productService, PhoneService phoneService,
-                      LaptopService laptopService, GPUService gpuService,
-                      DisplayMonitorService displayMonitorService)
+        LaptopService laptopService, GPUService gpuService,
+        DisplayMonitorService displayMonitorService)
     {
         InitializeComponent();
         _productService = productService;
@@ -73,23 +72,23 @@ public partial class MainWindow : Window
             var editPhone = new CreatePhone(phone, _phoneService);
             editPhone.Show();
         }
-        else if (LvEntries.SelectedItem is Laptop laptop)
+        else if (LvEntries.SelectedItem is LaptopViewModel laptop)
         {
             var editLaptop = new CreateLaptop(laptop, _laptopService);
             editLaptop.Show();
         }
-        else if (LvEntries.SelectedItem is GPU gpu)
+        else if (LvEntries.SelectedItem is GPUViewModel gpu)
         {
             var editGPU = new CreateGPU(gpu, _gpuService);
             editGPU.Show();
         }
-        else if (LvEntries.SelectedItem is DisplayMonitor displayMonitor)
+        else if (LvEntries.SelectedItem is DisplayMonitorViewModel displayMonitor)
         {
             var editDisplayMonitor = new CreateDisplayMonitor(displayMonitor, _displayMonitorService);
             editDisplayMonitor.Show();
         }
     }
-    
+
     private async void BtnDeleteClick(object sender, RoutedEventArgs e)
     {
         if (LvEntries.SelectedItem is Phone phone)
@@ -97,16 +96,19 @@ public partial class MainWindow : Window
             await _phoneService.DeletePhoneAsync(phone);
             MessageBox.Show("Telefon został usunięty!");
         }
+
         if (LvEntries.SelectedItem is DisplayMonitor displayMonitor)
         {
             await _displayMonitorService.DeleteDisplayMonitorAsync(displayMonitor);
             MessageBox.Show("Monitor został usunięty!");
         }
+
         if (LvEntries.SelectedItem is GPU gpu)
         {
             await _gpuService.DeleteGPUAsync(gpu);
             MessageBox.Show("GPU został usunięty!");
         }
+
         if (LvEntries.SelectedItem is Laptop laptop)
         {
             await _laptopService.DeleteLaptopAsync(laptop);
@@ -119,63 +121,6 @@ public class MainWindowContext : INotifyPropertyChanged
 {
     public ProductViewModel SelectedItem { get; set; }
     public List<ProductViewModel> Items { get; set; }
-    
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
-    }
-}
-
-public class ProductViewModel : INotifyPropertyChanged
-{
-    private Guid id;
-    public Guid Id
-    {
-        get
-        {
-            return id;
-        }
-        set
-        {
-            SetField(ref id, value);
-        }
-    }
-
-    private string name;
-    public string Name
-    {
-        get
-        {
-            return name;
-        }
-        set
-        {
-            SetField(ref name, value);
-        }
-    }
-
-    private ProductType type;
-    public ProductType Type
-    {
-        get
-        {
-            return type;
-        }
-        set
-        {
-            SetField(ref type, value);
-        }
-    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 

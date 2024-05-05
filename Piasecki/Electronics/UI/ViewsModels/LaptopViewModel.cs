@@ -1,9 +1,10 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Piasecki.Electronics.INTERFACES;
 
 namespace Piasecki.Electronics.UI.ViewsModels;
 
-public class PhoneViewModel : INotifyPropertyChanged
+public class LaptopViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -23,12 +24,28 @@ public class PhoneViewModel : INotifyPropertyChanged
         set { SetField(ref price, value); }
     }
 
-    private string camera;
+    private string gpu;
 
-    public string Camera
+    public string GPU
     {
-        get { return camera; }
-        set { SetField(ref camera, value); }
+        get { return gpu; }
+        set { SetField(ref gpu, value); }
+    }
+
+    private string cpu;
+
+    public string CPU
+    {
+        get { return cpu; }
+        set { SetField(ref cpu, value); }
+    }
+
+    private ProductBrand brand;
+
+    public ProductBrand Brand
+    {
+        get { return brand; }
+        set { SetField(ref brand, value); }
     }
 
     private Guid? id;

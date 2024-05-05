@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Piasecki.Electronics.UI.ViewsModels;
 
-public class PhoneViewModel : INotifyPropertyChanged
+public class DisplayMonitorViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -23,12 +23,12 @@ public class PhoneViewModel : INotifyPropertyChanged
         set { SetField(ref price, value); }
     }
 
-    private string camera;
+    private decimal diagonal;
 
-    public string Camera
+    public decimal Diagonal
     {
-        get { return camera; }
-        set { SetField(ref camera, value); }
+        get { return diagonal; }
+        set { SetField(ref diagonal, value); }
     }
 
     private Guid? id;
