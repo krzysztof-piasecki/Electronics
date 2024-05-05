@@ -6,7 +6,6 @@ namespace Piasecki.Electronics.DAO.MODEL;
 public class Laptop : IEntity
 {
     [Key] public Guid Id { get; set; }
-    public string Name { get; set; }
     public decimal Price { get; set; }
     public string CPU { get; set; }
     public string GPU { get; set; }

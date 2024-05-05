@@ -1,18 +1,18 @@
-﻿<Window
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="av"
-    DataContext="{Binding RelativeSource={RelativeSource Self}}"
-    Title="MainWindoiw" Height="450" Width="400"
-    x:Class="Piasecki.MainWindow">
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Piasecki.MainWindow"
+        Title="MainWindow" Height="450" Width="400"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="300" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -20,22 +20,38 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0"
-               Content="Lista Wszystkich Produktów"
-               Grid.ColumnSpan="6"
-               HorizontalAlignment="Center"
-               FontSize="24"
-               FontWeight="Bold" />
-        <ListView Name="LvEntries" Grid.Row="1" Grid.ColumnSpan="6"
-                  ItemsSource="{Binding MainWindowContext.Items}"
-                  SelectedItem="{Binding MainWindowContext.SelectedItem}" />
-        <Button Grid.Row="2" Grid.Column="0" Name="BtnAddPhone" Content="Dodaj Telefon" Click="BtnAddPhoneClick" />
-        <Button Grid.Row="2" Grid.Column="1" Name="BtnAddLaptop" Content="Dodaj Laptop"
-                Click="BtnAddLaptopClick" />
-        <Button Grid.Row="2" Grid.Column="2" Name="BtnAddGPU" Content="Dodaj GPU" Click="BtnAddGPUClick" />
-        <Button Grid.Row="2" Grid.Column="3" Name="BtnAddDisplayMonitor" Content="Dodaj Monitor"
-                Click="BtnAddDisplayMonitorClick" />
-        <Button Grid.Row="3" Grid.Column="1" Name="BtnEdit" Content="Edytuj" Click="BtnDeleteClick" />
-        <Button Grid.Row="4" Grid.Column="2" Name="DeleteAdd" Content="Usuń" Click="BtnEditClick" />
+
+        <Label Content="Lista Wszystkich Produktów" Grid.Row="0" Grid.ColumnSpan="4"
+               HorizontalAlignment="Center" FontSize="24" FontWeight="Bold" />
+
+        <TextBox x:Name="SearchBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="5"
+                 VerticalAlignment="Center" Width="200" />
+
+        <Button Content="Wyszukaj" Grid.Row="1" Grid.Column="2" Click="OnSearchClick" Margin="5"
+                VerticalAlignment="Center" />
+        <ComboBox Grid.Row="1" Grid.Column="3" Name="TypeFilterComboBox" HorizontalAlignment="Stretch" Margin="5"
+                  SelectedIndex="0" SelectionChanged="TypeFilterComboBox_SelectionChanged" Height="20" Width="80">
+            <ComboBoxItem Content="Wszystkie" Tag="All"/>
+            <ComboBoxItem Content="Laptop" Tag="Laptop"/>
+            <ComboBoxItem Content="Monitor" Tag="DisplayMonitor"/>
+            <ComboBoxItem Content="GPU" Tag="GPU"/>
+            <ComboBoxItem Content="Telefon" Tag="Phone"/>
+        </ComboBox>
+        <ListView Name="LvEntries" Grid.Row="2" Grid.ColumnSpan="4"
+                  ItemsSource="{Binding FilteredItems}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Name}" Width="Auto" />
+                    <GridViewColumn Header="Typ Produktu" DisplayMemberBinding="{Binding Type}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Grid.Row="5" Grid.Column="0" Content="Dodaj Telefon" Click="BtnAddPhoneClick" />
+        <Button Grid.Row="5" Grid.Column="1" Content="Dodaj Laptop" Click="BtnAddLaptopClick" />
+        <Button Grid.Row="5" Grid.Column="2" Content="Dodaj GPU" Click="BtnAddGPUClick" />
+        <Button Grid.Row="5" Grid.Column="3" Content="Dodaj Monitor" Click="BtnAddDisplayMonitorClick" />
+        <Button Grid.Row="6" Grid.Column="1" Content="Edytuj" Click="BtnEditClick" />
+        <Button Grid.Row="6" Grid.Column="2" Content="Usuń" Click="BtnDeleteClick" />
     </Grid>
 </Window>

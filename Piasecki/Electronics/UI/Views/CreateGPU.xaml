@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Title="CreatePhone" Height="450" Width="800">
+        Title="CreateGPU" Height="450" Width="800">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Content="GPU" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontSize="24"
                FontWeight="Bold" />
-        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1" Content="GPU:" />
+        <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1" Content="Nazwa:" />
         <TextBox Grid.Column="1" Grid.Row="1" Width="150" HorizontalAlignment="Left" Grid.ColumnSpan="3"
                  Text="{Binding Name}" />
         <Label Grid.Column="0" HorizontalAlignment="Center" Grid.Row="2" Content="Cena:" />

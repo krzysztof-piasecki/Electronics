@@ -25,7 +25,7 @@ public class GPUViewModel : INotifyPropertyChanged
 
     private string vram;
 
-    public string Vram
+    public string VRam
     {
         get { return vram; }
         set { SetField(ref vram, value); }

@@ -55,9 +55,9 @@ public class LaptopService
         await _repository.Update(laptop);
     }
 
-    public async Task GetLaptopByGuid(Guid guid)
+    public async Task<Laptop> GetLaptopByGuid(Guid guid)
     {
-        await _repository.GetById<Laptop>(guid);
+        return await _repository.GetById<Laptop>(guid);
     }
 
     public async Task DeleteLaptopAsync(Laptop laptop)

@@ -43,6 +43,8 @@ public class PhoneViewModel : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+    public bool CanSave => !string.IsNullOrWhiteSpace(Name) && Price > 0 && !string.IsNullOrWhiteSpace(Camera);
+
 
     protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
     {

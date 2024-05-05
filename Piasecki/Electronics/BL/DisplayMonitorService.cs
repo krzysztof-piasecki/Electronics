@@ -54,9 +54,9 @@ public class DisplayMonitorService
         await _repository.Update(displayMonitor);
     }
 
-    public async Task GetDisplayMonitorByGuid(Guid guid)
+    public async Task<DisplayMonitor> GetDisplayMonitorByGuid(Guid guid)
     {
-        await _repository.GetById<DisplayMonitor>(guid);
+        return await _repository.GetById<DisplayMonitor>(guid);
     }
 
     public async Task DeleteDisplayMonitorAsync(DisplayMonitor displayMonitor)

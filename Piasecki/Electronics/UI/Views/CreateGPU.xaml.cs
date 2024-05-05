@@ -1,5 +1,6 @@
 using System.Windows;
 using Piasecki.Electronics.BL;
+using Piasecki.Electronics.DAO.MODEL;
 using Piasecki.Electronics.UI.ViewsModels;
 
 namespace Piasecki.Electronics.UI.Views;
@@ -19,17 +20,30 @@ public partial class CreateGPU : Window
         DataContext = GPUViewModel;
     }
 
-    public CreateGPU(GPUViewModel gpuViewModel, GPUService gpuService)
+    public CreateGPU(GPU gpu, string name, GPUService gpuService)
     {
         InitializeComponent();
         _gpuService = gpuService;
-        GPUViewModel = gpuViewModel;
+        GPUViewModel = new GPUViewModel()
+        {
+            VRam = gpu.VRam,
+            Id = gpu.Id,
+            Price = gpu.Price,
+            Name = name
+        };
 
         DataContext = GPUViewModel;
     }
 
     private async void BtnSaveClick(object sender, RoutedEventArgs e)
     {
+        if (string.IsNullOrWhiteSpace(GPUViewModel.Name) ||
+            GPUViewModel.Price < 0 || 
+            string.IsNullOrWhiteSpace(GPUViewModel.VRam))
+        {
+            MessageBox.Show("Wszystkie pola muszą być wypełnione.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
         if (GPUViewModel.Id is null)
         {
             await _gpuService.AddGPUAsync(GPUViewModel);
@@ -40,6 +54,8 @@ public partial class CreateGPU : Window
             await _gpuService.UpdateGPUAsync(GPUViewModel);
             MessageBox.Show("GPU zaktualizowany!");
         }
+        this.Close();
+        Application.Current.MainWindow?.Show();
     }
 
     private void BtnBackClick(object sender, RoutedEventArgs e)

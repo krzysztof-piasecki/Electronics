@@ -30,7 +30,7 @@ public class GPUService
             Type = ProductType.GPU,
             GPUs = new GPU()
             {
-                VRam = gpuViewModel.Vram,
+                VRam = gpuViewModel.VRam,
                 Price = gpuViewModel.Price
             }
         };
@@ -53,9 +53,9 @@ public class GPUService
         await _repository.Update(gpu);
     }
 
-    public async Task GetGPUByGuid(Guid guid)
+    public async Task<GPU> GetGPUByGuid(Guid guid)
     {
-        await _repository.GetById<GPU>(guid);
+        return await _repository.GetById<GPU>(guid);
     }
 
     public async Task DeleteGPUAsync(GPU gpu)

@@ -14,11 +14,3 @@ public class Product : IEntity
     public virtual Phone Phone { get; set; }
     public virtual DisplayMonitor DisplayMonitors { get; set; }
 }
-
-public enum ProductType
-{
-    Laptop,
-    GPU,
-    Phone,
-    DisplayMonitor
-}
