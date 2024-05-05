@@ -25,7 +25,7 @@ namespace Piasecki.Electronics.UI.ViewModels
         public MainWindowViewModel()
         {
             Items = new ObservableCollection<ProductViewModel>();
-            FilteredItems = new ObservableCollection<ProductViewModel>(); // Inicjalizacja FilteredItems
+            FilteredItems = new ObservableCollection<ProductViewModel>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

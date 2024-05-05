@@ -53,7 +53,7 @@ public class PhoneService
         await _repository.Update(phone);
     }
 
-    public async Task<Phone>? GetPhoneByGuid(Guid guid)
+    public async Task<Phone?> GetPhoneByGuid(Guid guid)
     {
         return await _repository.GetById<Phone>(guid);
     }

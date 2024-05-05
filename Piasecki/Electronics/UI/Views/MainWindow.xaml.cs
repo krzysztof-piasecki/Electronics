@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using Piasecki.Electronics.BL;
 using Piasecki.Electronics.DAO.MODEL;
@@ -58,10 +59,9 @@ namespace Piasecki
         {
             string searchQuery = SearchBox.Text.ToLower();
             var filteredProducts = _viewModel.FilteredItems
-                .Where(product => product.Name.ToLower().Contains(searchQuery))
-                .ToList();
+                .Where(product => product.Name.ToLower().Contains(searchQuery));
 
-            LvEntries.ItemsSource = filteredProducts;
+            _viewModel.FilteredItems = new ObservableCollection<ProductViewModel>(filteredProducts);
         }
 
         private void BtnAddPhoneClick(object sender, RoutedEventArgs e)
@@ -95,7 +95,7 @@ namespace Piasecki
                 switch (selectedProduct.Type.ToString())
                 {
                     case "Phone":
-                        var phone = await _phoneService.GetPhoneByGuid(selectedProduct.Type.Id);
+                        var phone = await _phoneService.GetPhoneByGuid(selectedProduct.Id);
                         var editPhone = new CreatePhone(phone,selectedProduct.Name, _phoneService);
                         editPhone.Show();
                         break;
